@@ -1,4 +1,5 @@
-import 'package:counter_app_with_provider/statelesswidget_example.dart';
+import 'package:counter_app_with_provider/statefullwidget_example.dart';
+import 'package:counter_app_with_provider/why_provider.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: StatelesswidgetExample(),
+      home: WhyProvider(),
     );
   }
 }
