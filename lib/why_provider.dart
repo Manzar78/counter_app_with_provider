@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:counter_app_with_provider/provider/count_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class WhyProvider extends StatefulWidget {
@@ -16,14 +17,17 @@ class _WhyProviderState extends State<WhyProvider> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    final countProvider = Provider.of<CountProvider>(context, listen: false);
     Timer.periodic(Duration(seconds: 1), (timer) {
       count++;
-      setState(() {});
+      countProvider.setCount();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print("------- MY_LOG:     1");
+    final countProvider = Provider.of<CountProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -33,15 +37,20 @@ class _WhyProviderState extends State<WhyProvider> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            DateTime.now().hour.toString() +
-                ":" +
-                DateTime.now().minute.toString() +
-                ":" +
-                DateTime.now().second.toString(),
-            style: TextStyle(fontSize: 50),
+          Consumer<CountProvider>(
+            builder: (context, value, child) => Text(
+              "${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}",
+              style: TextStyle(fontSize: 50),
+            ),
           ),
-          Center(child: Text(count.toString(), style: TextStyle(fontSize: 50))),
+          Consumer<CountProvider>(
+            builder: (context, value, child) => Center(
+              child: Text(
+                value.getcount.toString(),
+                style: TextStyle(fontSize: 50),
+              ),
+            ),
+          ),
         ],
       ),
     );
