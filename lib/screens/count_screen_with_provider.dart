@@ -29,6 +29,7 @@ class _CountScreenWithProviderState extends State<CountScreenWithProvider> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           countProvider.setCount();
+          print("Count value after increment: ${countProvider.getcount}");
         },
         child: Icon(Icons.add),
       ),
